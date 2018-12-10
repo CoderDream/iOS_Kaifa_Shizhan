@@ -144,6 +144,16 @@ ISBN:978-7-5165-1549-5
 
 案例4-2：使用标签控制器构建界面
 
+```swift
+// 实例化 window 属性，并设置它的大小为当前屏幕大小
+self.window = UIWindow(frame: UIScreen.main.bounds)
+// 将 RoowViewController 的对象赋值给 window 的 rootViewController
+self.window?.rootViewController = RootViewController()
+self.window?.backgroundColor = UIColor.white
+// 显示程序窗口
+self.window?.makeKeyAndVisible()
+```
+
 4.3  滚动视图（UIScrollView）
 
 4.3.1  滚动视图的常用属性
