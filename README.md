@@ -174,6 +174,10 @@ self.window?.makeKeyAndVisible()
 
 案例4-4：使用表视图实现图书列表展示
 
+```shell
+Treating a forced downcast to 'BookModel' as optional will never produce 'nil'
+```
+
 4.5  网页视图（UIWebView）
 
 本章小结

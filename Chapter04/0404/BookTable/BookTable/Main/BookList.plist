@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   BookList.plist
+   BookTable
+
+   Created by CoderDream on 2018/12/10.
+   Copyright (c) 2018 CoderDream. All rights reserved.
+-->
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>精通iOS开发（第7版）</string>
+		<key>price</key>
+		<string>¥85.0</string>
+		<key>introduce</key>
+		<string>Swift和Objective-C双语版 iPhone iPad开发基本流程 iOS8操作系统的强大操作 Xcode6新功能</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>iOS 10开发指南</string>
+		<key>price</key>
+		<string>￥57.0</string>
+		<key>introduce</key>
+		<string>200多个实例，9小时视频讲解，Objective-C和Swift3.0双语讲解iOS 10的新特性的完全教程</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>iOS编程（第4版）</string>
+		<key>price</key>
+		<string>￥68.0</string>
+		<key>introduce</key>
+		<string>荣获Jolt生产力大奖</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Objective-C高级编程</string>
+		<key>price</key>
+		<string>¥88.0</string>
+		<key>introduce</key>
+		<string>iOS与OS X多线程和内存管理（苹果源代码不会告诉你的Objective-C高级编程）</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>高性能iOS应用开发</string>
+		<key>price</key>
+		<string>¥65.0</string>
+		<key>introduce</key>
+		<string>iOS开发必读，提升应用性能的实践，让App飞起来的软硬件解决之道</string>
+	</dict>
+</array>
+</plist>
