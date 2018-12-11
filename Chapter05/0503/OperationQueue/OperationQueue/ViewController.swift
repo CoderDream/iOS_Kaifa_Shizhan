@@ -33,7 +33,7 @@ class ViewController: UIViewController {
 //        queue.waitUntilAllOperationsAreFinished()   // 等待队列操作完成
         
         
-        /*添加Operation的依赖对象
+        /*添加Operation的依赖对象 */
          let queue = OperationQueue()
          
          let blockOpe1 = BlockOperation()
@@ -53,15 +53,15 @@ class ViewController: UIViewController {
          
          //删除依赖关系
          blockOpe1.removeDependency(blockOpe2)
- */
+
         
         
-        /*修改Operations的执行顺序*/
+        /*修改Operations的执行顺序
          let queue = OperationQueue()
          let blockOpe = BlockOperation()
          blockOpe.queuePriority = .low            //等级：veryLow，low，normal，high，veryHigh
          queue.addOperation(blockOpe)
- 
+ */
         
     }
 

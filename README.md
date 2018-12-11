@@ -212,6 +212,133 @@ Treating a forced downcast to 'BookModel' as optional will never produce 'nil'
 
 5.4.2  GCD线程队列
 
+4种队列组合
+
+ - 1）同步+串行队列
+
+```swift
+
+ func sync_serial() {
+     //创建一个串行队列
+     let serialQueue = DispatchQueue(label: "serial", attributes: .init(rawValue: 0))
+     //同步执行三个任务
+     serialQueue.sync {
+        print("1 + \(Thread.current)")
+     }
+     serialQueue.sync {
+        print("2 + \(Thread.current)")
+     }
+     serialQueue.sync {
+        print("3 + \(Thread.current)")
+     }
+ }
+ sync_serial()
+```
+
+- 执行结果：
+
+```
+<NSThread: 0x282f19c40>{number = 3, name = (null)}
+<NSThread: 0x282f1cbc0>{number = 4, name = (null)}
+<NSThread: 0x282f19a80>{number = 5, name = (null)}
+1 + <NSThread: 0x282f42dc0>{number = 1, name = main}
+2 + <NSThread: 0x282f42dc0>{number = 1, name = main}
+3 + <NSThread: 0x282f42dc0>{number = 1, name = main}
+<NSThread: 0x282f42dc0>{number = 1, name = main}
+```
+
+- 2）异步+串行队列
+
+```swift
+func async_serial() {
+	//创建一个串行队列
+	let serialQueue = DispatchQueue(label: "serial", attributes: .init(rawValue: 0))
+	//异步执行三个任务
+	serialQueue.async {
+		print("1 + \(Thread.current)")
+	}
+	serialQueue.async {
+		print("2 + \(Thread.current)")
+	}
+	serialQueue.async {
+		print("3 + \(Thread.current)")
+	}
+}
+```
+- 执行结果
+
+```swift
+<NSThread: 0x2820feb40>{number = 3, name = (null)}
+<NSThread: 0x2820feec0>{number = 4, name = (null)}
+<NSThread: 0x2820e6100>{number = 5, name = (null)}
+<NSThread: 0x2820b6f80>{number = 1, name = main}
+1 + <NSThread: 0x2820e4480>{number = 6, name = (null)}
+2 + <NSThread: 0x2820e4480>{number = 6, name = (null)}
+3 + <NSThread: 0x2820e4480>{number = 6, name = (null)}
+```
+
+- 3）同步+并发队列
+
+```swift
+func sync_concurrent() {
+    //创建一个全局队列
+    let globalQueue = DispatchQueue.global()
+    //同步执行三个任务
+    globalQueue.sync {
+        print("1 + \(Thread.current)")
+    }
+    globalQueue.sync {
+        print("2 + \(Thread.current)")
+    }
+    globalQueue.sync {
+        print("3 + \(Thread.current)")
+    }
+}
+sync_concurrent()
+```
+- 执行结果
+
+```
+<NSThread: 0x281150b40>{number = 3, name = (null)}
+<NSThread: 0x281150c80>{number = 4, name = (null)}
+<NSThread: 0x281151600>{number = 5, name = (null)}
+1 + <NSThread: 0x281105e00>{number = 1, name = main}
+2 + <NSThread: 0x281105e00>{number = 1, name = main}
+3 + <NSThread: 0x281105e00>{number = 1, name = main}
+<NSThread: 0x281105e00>{number = 1, name = main}
+```
+
+- 4）异步+并发队列
+
+```swift
+func async_concurrent() {
+    //创建一个全局队列
+    let globalQueue = DispatchQueue.global()
+    //异步执行三个任务
+    globalQueue.async {
+        print("1 + \(Thread.current)")
+    }
+    globalQueue.async {
+        print("2 + \(Thread.current)")
+    }
+    globalQueue.async {
+        print("3 + \(Thread.current)")
+    }
+}
+async_concurrent()
+```
+- 执行结果
+
+```
+<NSThread: 0x2812a1480>{number = 5, name = (null)}
+<NSThread: 0x2812a0e40>{number = 4, name = (null)}
+<NSThread: 0x2812a0f00>{number = 3, name = (null)}
+<NSThread: 0x2812f9d40>{number = 1, name = main}
+2 + <NSThread: 0x2812a0d00>{number = 7, name = (null)}
+3 + <NSThread: 0x2812a0d00>{number = 7, name = (null)}
+1 + <NSThread: 0x2812a1a00>{number = 6, name = (null)}
+```
+
 案例5-1：使用多线程模拟火车票售票系统
 
 本章小结
