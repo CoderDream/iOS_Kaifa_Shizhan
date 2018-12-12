@@ -15,6 +15,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var latLabel: UILabel!           // 纬度
     @IBOutlet weak var altLabel: UILabel!           // 高度
 
+    @IBOutlet weak var addressLabel: UILabel!       // 地理位置描述信息
+    var myLocation:CLLocation!
+    
     var locationManager: CLLocationManager!         // 定位服务管理对象
     
     @IBAction func getGeoInfoBtnAction(_ sender: UIButton) {
@@ -35,8 +38,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // 调用以下两个方法，程序会弹出用户授权对话框
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.requestAlwaysAuthorization()
-        
-        
+                
         self.locationManager.startUpdatingLocation()
     }
 
@@ -62,6 +64,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.latLabel.text = lat
         self.altLabel.text = alt
         print("定位成功，获得设备当前的经度\(lng)、纬度\(lat)和高度\(alt)信息")
+        self.myLocation = currentLocation
     }
     
     // 定位失败
