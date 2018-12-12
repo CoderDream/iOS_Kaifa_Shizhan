@@ -29,8 +29,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        addPlayToAVPlayerLayer()
     }
 
+    @IBAction func playOrPauseBtnAction(_ sender: Any) {
+        let button = sender as! UIButton
+        if let player = player {
+            if player.rate == 0 {               // 如果点击时已暂停，则开始播放
+                player.play()
+                button.setTitle("暂停", for: .normal)
+                button.setImage(UIImage(named: "player_pause"), for: .normal)
+            } else if player.rate == 1 {
+                player.pause()                  // 如果点击时正在播放，则暂停
+                button.setTitle("播放", for: .normal)
+                button.setImage(UIImage(named: "player_pause"), for: .normal)
+            }
+        }
+    }
+    
     // 初始化数据
     func addPlayToAVPlayerLayer() {
         // 获取本地视频资源
@@ -73,6 +89,9 @@ class ViewController: UIViewController {
     
     // 将秒转成时间字符串，将这个方法单独封装，便于多
     func formatPlayTime(seconds: Float64) -> String {
+//        if seconds == nil {
+//            print("seconds is nil")
+//        }
         let min = Int(seconds / 60)
         // 取余
         let sec = Int(seconds.truncatingRemainder(dividingBy: 60))
@@ -91,7 +110,7 @@ class ViewController: UIViewController {
         return result
     }
     
-    //为AVPlayerItem和AVPlayer添加监控
+    // 为AVPlayerItem和AVPlayer添加监控
     func addObserver() {
         // 为 AVPlayerItem 添加 status 属性观察，得到资源准备好，开始播放视频
         playerItem?.addObserver(self, forKeyPath: "status", options: .new, context: nil)
@@ -100,15 +119,47 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.playerItemDidReachEnd(notification:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
     }
     
-    //播放结束，回到最开始位置，按钮显示“播放”
+    // 去除观察者
+    func removeObserver() {
+        playerItem?.removeObserver(self, forKeyPath: "status")
+        playerItem?.removeObserver(self, forKeyPath: "loadedTimeRanges")
+        player?.removeTimeObserver(timeObserver!)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime
+            , object: playerItem)
+    }
+    
+    deinit {
+        removeObserver()
+    }
+    
+    // 播放结束，回到最开始位置，按钮显示“播放”
     @objc func playerItemDidReachEnd(notification: Notification) {
         player?.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         progress.progress = 0.0
         playOrPauseButton.setTitle("播放", for: .normal)
     }
     
+    // 通过KVO监控播放器状态
+    // keyPath:监控属性，object:监视器，change:状态改变，context:上下文
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard let object = object as? ACPl
+        guard let object = object as? AVPlayerItem else {
+            return
+        }
+        guard let keyPath = keyPath else {
+            return
+        }
+        
+        if keyPath == "status" {
+            if object.status == .readyToPlay {
+                player?.play()
+                print("正在播放。。。,视频总长度：\(formatPlayTime(seconds: CMTimeGetSeconds(object.duration)))")
+            } else {
+                print("播放出错")
+            }
+        } else if keyPath == "loadedTimeRanges" {
+            let loadedTime = availableDurationWithPlayerItem()
+            print("当前加载进度\(loadedTime)")
+        }
     }
 }
 
