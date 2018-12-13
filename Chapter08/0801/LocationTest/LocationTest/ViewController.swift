@@ -22,6 +22,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func getGeoInfoBtnAction(_ sender: UIButton) {
         self.locationManager.startUpdatingLocation()
+
+    }
+    
+    @IBAction func reverseGeocodeBtnAction(_ sender: UIButton) {
+        let geocode = CLGeocoder()
+        geocode.reverseGeocodeLocation(myLocation) { (placemarks, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else if placemarks != nil && placemarks!.count > 0 {
+                // 取出地理位置信息
+                let placemark = placemarks![0]
+                let name = placemark.name
+                self.addressLabel.text = name
+            }
+        }
     }
     
     override func viewDidLoad() {
