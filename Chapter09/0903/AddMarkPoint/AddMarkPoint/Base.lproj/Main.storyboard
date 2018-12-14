@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AddMarkPoint" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ega-Pz-SRf">
+                                <rect key="frame" x="25" y="70" width="364" height="31.333333333333329"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ega-Pz-SRf" secondAttribute="height" multiplier="35:3" id="SP7-kG-8Vv"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfl-vX-2hL">
+                                <rect key="frame" x="25" y="131.33333333333334" width="364" height="31"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gfl-vX-2hL" secondAttribute="height" multiplier="35:3" id="Zv9-Fy-OCI"/>
+                                </constraints>
+                                <state key="normal" title="地理信息编码查询">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="gencodeAddressAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h2A-fA-szd"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入要查询的地点关键字：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMX-Zk-IUC">
+                                <rect key="frame" x="30" y="30" width="354" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="oKf-bF-xn4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KnX-km-6tJ">
+                                <rect key="frame" x="0.0" y="199.33333333333331" width="414" height="536.66666666666674"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gfl-vX-2hL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="3rV-xu-SV8"/>
+                            <constraint firstItem="KnX-km-6tJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Xa-vw-dmP"/>
+                            <constraint firstItem="pMX-Zk-IUC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="OAf-vw-2RZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KnX-km-6tJ" secondAttribute="trailing" id="R0f-rI-nha"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ega-Pz-SRf" secondAttribute="trailing" constant="25" id="V5l-tR-ldZ"/>
+                            <constraint firstItem="KnX-km-6tJ" firstAttribute="top" secondItem="gfl-vX-2hL" secondAttribute="bottom" constant="37" id="cFC-I8-Lr2"/>
+                            <constraint firstItem="ega-Pz-SRf" firstAttribute="top" secondItem="pMX-Zk-IUC" secondAttribute="bottom" constant="10" id="fN4-YV-Uvo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KnX-km-6tJ" secondAttribute="bottom" id="irq-qP-kpd"/>
+                            <constraint firstItem="ega-Pz-SRf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="jGc-YI-GrN"/>
+                            <constraint firstItem="gfl-vX-2hL" firstAttribute="top" secondItem="ega-Pz-SRf" secondAttribute="bottom" constant="30" id="k2f-fn-rjB"/>
+                            <constraint firstItem="pMX-Zk-IUC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="rZn-Nc-Jp5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pMX-Zk-IUC" secondAttribute="trailing" constant="30" id="yb4-eM-GIr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gfl-vX-2hL" secondAttribute="trailing" constant="25" id="zZf-Pe-Ot1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="keywordTextField" destination="ega-Pz-SRf" id="ylI-ek-rpw"/>
+                        <outlet property="mapView" destination="KnX-km-6tJ" id="qds-u5-Zyk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134.78260869565219" y="133.69565217391306"/>
+        </scene>
+    </scenes>
+</document>
