@@ -43,8 +43,7 @@ class ViewController: UIViewController {
             }
         }
         // 收回键盘
-        self.keywordTextField.resignFirstResponder()
-        
+        self.keywordTextField.resignFirstResponder()        
     }
     
 }

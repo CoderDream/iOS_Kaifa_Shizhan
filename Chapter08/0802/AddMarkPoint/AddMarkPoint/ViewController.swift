@@ -20,6 +20,31 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
 
     @IBAction func gencodeAddressAction(_ sender: UIButton) {
+        if keywordTextField.text == nil {
+            return
+        }
+        
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(keywordTextField.text!) { (placemarks, error) in
+            // 清除所有标记点
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            
+            if placemarks != nil {
+                // 取出查询到的每个地址并没有设置标注点
+                for placemark in placemarks! {
+                    let annotation = Annotation(coordinate: placemark.location!.coordinate)
+                    annotation.subName = placemark.name
+                    // 添加标注点
+                    self.mapView.addAnnotation(annotation)
+                }
+                // 取出最后一个位置信息显示在地图上
+                let lastPlace = placemarks!.last
+                let region = MKCoordinateRegion.init(center: lastPlace!.location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                self.mapView.setRegion(region, animated: true)
+            }
+        }
+        // 收回键盘
+        self.keywordTextField.resignFirstResponder()
     }
     
     // 给地图视图添加标注时回调
