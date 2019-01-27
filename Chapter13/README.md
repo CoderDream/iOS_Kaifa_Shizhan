@@ -220,8 +220,6 @@ class TableViewController: UITableViewController {
                 fatalError("获取失败")
             }
         }
-
-     
     }
 }
 ```
