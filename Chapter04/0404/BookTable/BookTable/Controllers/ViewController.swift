@@ -66,7 +66,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             // 从 xib 文件中加载视图
             bookCell = Bundle.main.loadNibNamed("BookCell", owner: self, options: nil)?.last as? BookCell
             // 从数组中取出存数据的模型
-            let bookModel: BookModel! = dataArray[indexPath.row] as! BookModel
+            let bookModel: BookModel! = dataArray[indexPath.row] as? BookModel
             // 将模型传到 cell 中，在 cell 中进行赋值
             bookCell?.configWithBookModel(bookModel: bookModel!)
         }
